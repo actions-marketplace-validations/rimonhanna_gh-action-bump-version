@@ -71,10 +71,10 @@ Toolkit.run(async tools => {
     await tools.runInWorkspace('git', ['tag', newVersion])
     await tools.runInWorkspace('git', ['push', remoteRepo, '--follow-tags'])
     await tools.runInWorkspace('git', ['push', remoteRepo, '--tags'])
+    Toolkit.setOutput('TAG', newVersion);
   } catch (e) {
     tools.log.fatal(e)
     tools.exit.failure('Failed to bump version')
   }
-  Toolkit.setOutput('TAG', newVersion);
   tools.exit.success('Version bumped!')
 })
