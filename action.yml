@@ -16,5 +16,5 @@ inputs:
     default: ''
     required: false
 outputs:
-  TAG:
+  tag:
     description: 'The tag that was just created'
