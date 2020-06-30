@@ -13,8 +13,8 @@ Toolkit.run(async tools => {
   const event = tools.context.payload
 
   let version = 'patch'
-  
-  if(commits !== undefined) {
+
+  if(event.commits !== undefined) {
     const messages = event.commits.map(commit => commit.message + '\n' + commit.body)
 
     const commitMessage = 'version bump to'
