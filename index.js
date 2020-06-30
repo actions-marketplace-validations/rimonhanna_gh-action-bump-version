@@ -13,11 +13,11 @@ Toolkit.run(async tools => {
   const event = tools.context.payload
 
   let version = 'patch'
+  const commitMessage = 'version bump to'
 
   if(event.commits !== undefined) {
     const messages = event.commits.map(commit => commit.message + '\n' + commit.body)
 
-    const commitMessage = 'version bump to'
     const isVersionBump = messages.map(message => message.toLowerCase().includes(commitMessage)).includes(true)
     if (isVersionBump) {
       tools.exit.success('No action necessary!')
