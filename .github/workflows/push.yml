@@ -34,5 +34,7 @@ jobs:
         uses: Roang-zero1/github-create-release-action@master
         with:
           created_tag: ${{ steps.version_bump_and_create_tag.outputs.TAG }}
+          release_title: ${{ steps.version_bump_and_create_tag.outputs.TAG }}
+          update_existing: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
