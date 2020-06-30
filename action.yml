@@ -15,3 +15,6 @@ inputs:
     description: 'Custom dir to the package'
     default: ''
     required: false
+outputs:
+  TAG:
+    description: 'The tag that was just created'

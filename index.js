@@ -1,4 +1,5 @@
 const { Toolkit } = require('actions-toolkit')
+const { core } = require('@actions/core');
 const { execSync } = require('child_process')
 
 // Change working directory if user defined PACKAGEJSON_DIR
@@ -71,5 +72,6 @@ Toolkit.run(async tools => {
     tools.log.fatal(e)
     tools.exit.failure('Failed to bump version')
   }
+  core.setOutput('TAG', newVersion);
   tools.exit.success('Version bumped!')
 })
