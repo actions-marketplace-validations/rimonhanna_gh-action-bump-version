@@ -1,5 +1,4 @@
 const { Toolkit } = require('actions-toolkit')
-const { Core } = require('@actions/core')
 const { execSync } = require('child_process')
 
 // Change working directory if user defined PACKAGEJSON_DIR
@@ -72,7 +71,7 @@ Toolkit.run(async tools => {
     await tools.runInWorkspace('git', ['tag', newVersion])
     await tools.runInWorkspace('git', ['push', remoteRepo, '--follow-tags'])
     await tools.runInWorkspace('git', ['push', remoteRepo, '--tags'])
-    Core.setOutput('TAG', newVersion);
+    tools.outputs.TAG = newVersion
   } catch (e) {
     tools.log.fatal(e)
     tools.exit.failure('Failed to bump version')
