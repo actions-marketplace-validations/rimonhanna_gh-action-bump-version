@@ -1,5 +1,5 @@
 const { Toolkit } = require('actions-toolkit')
-const { core } = require('@actions/core');
+const { core } = require('actions/core');
 const { execSync } = require('child_process')
 
 // Change working directory if user defined PACKAGEJSON_DIR
