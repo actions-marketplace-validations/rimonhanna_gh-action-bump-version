@@ -12,22 +12,26 @@ Toolkit.run(async tools => {
   const pkg = tools.getPackageJSON()
   const event = tools.context.payload
 
-  const messages = event.commits.map(commit => commit.message + '\n' + commit.body)
-
-  const commitMessage = 'version bump to'
-  const isVersionBump = messages.map(message => message.toLowerCase().includes(commitMessage)).includes(true)
-  if (isVersionBump) {
-    tools.exit.success('No action necessary!')
-    return
-  }
-
   let version = 'patch'
-  if (messages.map(message => message.includes('BREAKING CHANGE') || message.includes('major')).includes(true)) {
-    version = 'major'
-  } else if (messages.map(
-    message => message.toLowerCase().startsWith('feat') || message.toLowerCase().includes('minor')).includes(true)) {
-    version = 'minor'
+  
+  if(commits !== undefined) {
+    const messages = event.commits.map(commit => commit.message + '\n' + commit.body)
+
+    const commitMessage = 'version bump to'
+    const isVersionBump = messages.map(message => message.toLowerCase().includes(commitMessage)).includes(true)
+    if (isVersionBump) {
+      tools.exit.success('No action necessary!')
+      return
+    }
+  
+    if (messages.map(message => message.includes('BREAKING CHANGE') || message.includes('major')).includes(true)) {
+      version = 'major'
+    } else if (messages.map(
+      message => message.toLowerCase().startsWith('feat') || message.toLowerCase().includes('minor')).includes(true)) {
+      version = 'minor'
+    }
   }
+  
 
   try {
     const current = pkg.version.toString()
